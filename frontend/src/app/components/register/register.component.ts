@@ -45,6 +45,7 @@ export class RegisterComponent{
     if (this.form.valid) {
       this.submitEM.emit(this.form.value);
       console.log(this.form.value);
+      
       //Go to TODO page
       this.auth.register(this.credentials).subscribe(
         () => {
