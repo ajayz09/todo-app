@@ -5,7 +5,7 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Email ID</mat-label>
-            <input type="text" matInput formControlName="email">
+            <input type="text" matInput formControlName="email" [(ngModel)]="credentials.email">
             <mat-error *ngIf="form.hasError('required', 'email')">
                 Please enter your email id
             </mat-error>
@@ -15,7 +15,7 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input type="password" matInput formControlName="password">
+            <input type="password" matInput formControlName="password" [(ngModel)]="credentials.password">
             <mat-error *ngIf="form.hasError('required', 'password')">
                 Please enter your password
             </mat-error>

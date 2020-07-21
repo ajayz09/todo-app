@@ -32,7 +32,15 @@ export class LoginComponent {
 
   submit() {
     console.log("Login Button");
-    this.router.navigate(['/todo']);
+    alert("Login Button Clicked")
+    this.auth.login(this.credentials).subscribe(
+      () => {
+        this.router.navigate(['/todo']);
+      },
+      err => {
+        console.error(err)
+      }
+    )
     if (this.form.valid) {
       this.submitEM.emit(this.form.value);
     }
@@ -45,14 +53,7 @@ export class LoginComponent {
 
   onClickLogin() {
     console.log("Login button clicked");
-    this.auth.login(this.credentials).subscribe(
-      () => {
-        this.router.navigate(['/todo']);
-      },
-      err => {
-        console.error(err)
-      }
-    )
+    
   }
 
   @Input() error: string | null;
