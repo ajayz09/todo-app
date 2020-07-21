@@ -1,0 +1,23 @@
+<div class="todo-container">
+
+  <div class="todo-nav-bar">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab  *ngFor="let content of data" [label]="content.item">
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="todo-add-content">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="input-group">
+          <input type="text" class="form-control bg-transparent rounded" placeholder="add details">
+          <span class="add-todobutton input-group-btn">
+            <button mat-flat-button class="btn btn-default" type="button">Add</button>
+          </span>
+        </div>
+
+    </form>
+  </div>
+
+</div>
