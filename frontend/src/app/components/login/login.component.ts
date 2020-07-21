@@ -1,5 +1,6 @@
 import { Input, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
+import { AuthenticationService, TokenPayload } from '../../services/authentication/authentication.service'
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -11,7 +12,15 @@ import { Router } from '@angular/router';
 
 export class LoginComponent {
 
-  constructor(private router: Router){}
+  credentials: TokenPayload = {
+    _id: '',
+    fullName: '',
+    userName: '',
+    email: '',
+    password: ''
+  }
+
+  constructor(private auth: AuthenticationService,private router: Router){}
 
   form: FormGroup = new FormGroup({
     email: new FormControl('',[
@@ -34,10 +43,17 @@ export class LoginComponent {
     this.router.navigate(['/register']);
   }
 
-  // onClickLogin() {
-  //   console.log("Login button clicked");
-  //   this.router.navigate(['/todo']);
-  // }
+  onClickLogin() {
+    console.log("Login button clicked");
+    this.auth.login(this.credentials).subscribe(
+      () => {
+        this.router.navigate(['/todo']);
+      },
+      err => {
+        console.error(err)
+      }
+    )
+  }
 
   @Input() error: string | null;
 
