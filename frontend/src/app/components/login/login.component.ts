@@ -32,7 +32,7 @@ export class LoginComponent {
 
   submit() {
     console.log("Login Button");
-    alert("Login Button Clicked")
+    // alert("Login Button Clicked")
     this.auth.login(this.credentials).subscribe(
       () => {
         this.router.navigate(['/todo']);

@@ -34,7 +34,6 @@ export class AuthenticationService {
 
   private saveToken(token: string): void {
     localStorage.setItem('usertoken', token)
-    debugger
     this.token = token
   }
 
@@ -58,9 +57,7 @@ export class AuthenticationService {
   }
 
   public isLoggedIn(): boolean {
-    debugger  
     const user = this.getUserDetails()
-    debugger
     if (user) {
       return user.exp > Date.now() / 1000
     } else {
@@ -71,12 +68,9 @@ export class AuthenticationService {
   public register(user: TokenPayload): Observable<any> {
       
     const base = this.http.post(`/users/register`, user)
-    debugger
     const request = base.pipe(
       map((data: TokenResponse) => {
-        debugger  
-        if (data.token) {
-          debugger  
+        if (data.token) {  
           this.saveToken(data.token)
         }
         return data
@@ -86,14 +80,10 @@ export class AuthenticationService {
   }
 
   public login(user: TokenPayload): Observable<any> {
-    debugger
     const base = this.http.post(`/users/login`, user)
-    debugger
     const request = base.pipe(
       map((data: TokenResponse) => {
-        debugger
         if (data.token) {
-          debugger
           this.saveToken(data.token)
         }
         return data

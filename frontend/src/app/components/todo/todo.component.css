@@ -21,51 +21,7 @@
 .todo-add-content{
   padding: 10px;
   margin-top: 10px;
-}
-
-.todo-add-content form {
-  display: flex;
-  /* flex-wrap: wrap; */
-  justify-content: space-between;
-  align-items: center;
 
 }
 
-.todo-add-content form .mat-form-field {
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-  flex-grow: 1;
-  height: 30px;
-}
 
-.todo-add-content form .add-button {
-  
-  margin: 20px;
-  order: 1;
-  align-items: center;
-  height: 30px;
-
-  /* align-items: flex-end; */
-}
-
-::-webkit-input-placeholder {
-  font-size: 12px;
-}
-
-.todo-add-content .mat-flat-button{
-  font-family: 'Lato', sans-serif !important;
-   background-color: #6DA6F2 !important;
-   color: #FFFFFF !important;
- }
-
-.add-todobutton{
-  margin-left: 20px;
-} 
-
-/* .mat-group {
-  font-family: 'Lato', sans-serif !important;
-} */
-/* .mat-body{
-    font-family: 'Lato', sans-serif;
- } */
