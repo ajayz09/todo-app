@@ -94,7 +94,7 @@ export class AuthenticationService {
   }
 
   public profile(): Observable<any> {
-    return this.http.get(`/users/profile`, {
+    return this.http.get(`/users/todo`, {
       headers: { Authorization: ` ${this.getToken()}` }
     })
   }

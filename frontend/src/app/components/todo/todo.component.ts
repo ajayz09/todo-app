@@ -2,6 +2,7 @@ import { Input, Component, Output, EventEmitter, ViewEncapsulation } from '@angu
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication/authentication.service'
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -11,6 +12,10 @@ import { Router } from '@angular/router';
 })
 
 export class TodoComponent {
+
+  constructor(private auth: AuthenticationService,private router: Router){}
+
+  
 
   form: FormGroup = new FormGroup({
     adddetails: new FormControl(''),
@@ -28,8 +33,16 @@ export class TodoComponent {
         }
      ];
 
+     getCurrentUserId(){
+      const user = this.auth.getUserDetails()
+      return user._id
+     }
+     
      submit() {
+        const userId = this.getCurrentUserId()
+      
+      
        console.log("Login Button");
-
+      console.log(userId);
      }
 }

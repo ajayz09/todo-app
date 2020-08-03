@@ -19,13 +19,13 @@ app.use(function(req, res, next) {
     next();
   });
 
-app.get('/user',(req, res) => {
+app.get('/users',(req, res) => {
     User.find({})
         .then(user => res.send(user))
         .catch((error) => console.log(error));
 });
 
-app.post('/user',(req, res) => {
+app.post('/users',(req, res) => {
     (new User({
                 'fullName': req.body.fullName,
                 'userName': req.body.userName,
@@ -135,7 +135,7 @@ app.get('/users/todo', (req, res) =>{
     })
 })
 
-app.get('/user/:userId', (req, res) => {
+app.get('/users/:userId', (req, res) => {
     User.find({
             _id : req.params.userId
         })
@@ -143,15 +143,15 @@ app.get('/user/:userId', (req, res) => {
         .catch((error) => console.log(error));
 });
 
-app.get('/user/:userId/tasks', (req, res) => {
+app.get('/users/:userId/tasks', (req, res) => {
     Task.find({
-            _userId : req.params._userId
+            _userId : req.params.userId
         })
         .then(task => res.send(task))
         .catch((error) => console.log(error));
 });
 
-app.post('/user/:userId/tasks', (req, res) => {
+app.post('/users/:userId/tasks', (req, res) => {
     (new Task({
             '_userId' : req.params.userId,
             'title' : req.body.title
@@ -161,7 +161,7 @@ app.post('/user/:userId/tasks', (req, res) => {
         .catch((error) => console.log(error));
 });
 
-app.delete('/user/:userId', (req, res) =>{
+app.delete('/users/:userId', (req, res) =>{
     User.findByIdAndDelete(req.params.userId)
         .then(user => res.send(user))
         .catch((error) => console.log(error));
