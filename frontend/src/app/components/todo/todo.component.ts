@@ -3,6 +3,8 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication/authentication.service'
+import Task from 'src/app/models/tasks'
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -13,15 +15,21 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 
 export class TodoComponent {
 
-  constructor(private auth: AuthenticationService,private router: Router){}
+   tasks: Task[] = [];
 
-  
+   constructor(private auth: AuthenticationService, private router: Router, private taskService: TaskService){}
 
-  form: FormGroup = new FormGroup({
-    adddetails: new FormControl(''),
-  });
+   ngOnInit() {
+      const userId = this.getCurrentUserId()
 
-    data = [
+      this.taskService.getTasks(userId)
+         .subscribe((tasks: Task[]) => this.tasks = tasks);   
+   }
+   form: FormGroup = new FormGroup({
+      adddetails: new FormControl(''),
+   });
+
+   data = [
         {
            item: "All"
         },
@@ -33,16 +41,13 @@ export class TodoComponent {
         }
      ];
 
-     getCurrentUserId(){
+   getCurrentUserId(){
       const user = this.auth.getUserDetails()
       return user._id
-     }
-     
-     submit() {
-        const userId = this.getCurrentUserId()
-      
-      
-       console.log("Login Button");
-      console.log(userId);
-     }
+   }
+   
+   submit() {
+      debugger
+      console.log("Login Button");
+   }
 }
