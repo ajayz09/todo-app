@@ -1,53 +1,86 @@
-import { Input, Component, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../../services/authentication/authentication.service'
-import Task from 'src/app/models/tasks'
-import { TaskService } from 'src/app/services/task.service';
+import {
+  Input,
+  Component,
+  Output,
+  EventEmitter,
+  ViewEncapsulation
+} from "@angular/core";
+
+import {
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  Validators
+} from "@angular/forms";
+
+import { NgModule } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AuthenticationService } from "../../services/authentication/authentication.service";
+import Task from "src/app/models/tasks";
+import { TaskService } from "src/app/services/task.service";
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    selector: 'app-todo',
-    templateUrl: './todo.component.html',
-    styleUrls: ['./todo.component.css']
+  encapsulation: ViewEncapsulation.None,
+  selector: "app-todo",
+  templateUrl: "./todo.component.html",
+  styleUrls: ["./todo.component.css"]
 })
-
 export class TodoComponent {
+  public userId;
+  tasks: Task[] = [];
 
-   tasks: Task[] = [];
+  constructor(
+    private auth: AuthenticationService,
+    private router: Router,
+    private taskService: TaskService,
+    private route: ActivatedRoute
+  ) {}
 
-   constructor(private auth: AuthenticationService, private router: Router, private taskService: TaskService){}
+  ngOnInit() {
+    this.getTasks();
+  }
 
-   ngOnInit() {
-      const userId = this.getCurrentUserId()
+  getTasks() {
+    this.userId = this.getCurrentUserId();
+    this.taskService
+      .getTasks(this.userId)
+      .subscribe((tasks: Task[]) => (this.tasks = tasks));
+  }
 
-      this.taskService.getTasks(userId)
-         .subscribe((tasks: Task[]) => this.tasks = tasks);   
-   }
-   form: FormGroup = new FormGroup({
-      adddetails: new FormControl(''),
-   });
+  form: FormGroup = new FormGroup({
+    addDetails: new FormControl("", Validators.required)
+  });
 
-   data = [
-        {
-           item: "All"
-        },
-        {
-           item: "Active"
-        },
-        {
-           item: "Completed"
-        }
-     ];
+  data = [
+    {
+      item: "All"
+    },
+    {
+      item: "Active"
+    },
+    {
+      item: "Completed"
+    }
+  ];
 
-   getCurrentUserId(){
-      const user = this.auth.getUserDetails()
-      return user._id
-   }
-   
-   submit() {
-      debugger
-      console.log("Login Button");
-   }
+  getCurrentUserId() {
+    const user = this.auth.getUserDetails();
+    return user._id;
+  }
+
+  resetAddDetailsForm() {
+    this.form.reset();
+    this.form.controls.addDetails.setErrors(null);
+  }
+
+  submit() {
+    if (this.form.invalid) return;
+
+    //  Create new task
+    this.taskService
+      .createTasks(this.userId, this.form.value.addDetails)
+      .subscribe((tasks: Task[]) => this.getTasks());
+
+    this.resetAddDetailsForm();
+  }
 }

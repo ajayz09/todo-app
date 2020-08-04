@@ -7,17 +7,21 @@
         <form [formGroup]="form" class="todo-add-content-form" (ngSubmit)="submit()"  *ngIf="content.item !== 'Completed'">
           <div class="todo-add-content">
             <mat-form-field appearance="outline">
-              <input matInput placeholder="Placeholder">
+              <input matInput placeholder="Placeholder" formControlName="addDetails">
+              <mat-error *ngIf="form.hasError('required', 'addDetails')">
+                Task cannot be empty
+              </mat-error>
             </mat-form-field>
             <div class="add-content-btn">
               <button mat-button>Add</button>
             </div>
           </div> 
         </form> 
-        <section class="example-section">
-            <mat-checkbox class="example-margin">Check me!</mat-checkbox>
-        </section>
-        
+        <div class="example-section">
+            <ul *ngFor="let task of tasks">
+            <mat-checkbox class="example-margin"> {{ task.title }}</mat-checkbox>
+            </ul>
+          </div>
       </mat-tab>
     </mat-tab-group>
   </div>
