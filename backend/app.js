@@ -167,5 +167,13 @@ app.delete('/users/:userId', (req, res) =>{
         .catch((error) => console.log(error));
 });
 
+app.delete('/users/:userId/tasks/:taskId', (req,res) => {
+    Task.findOneAndDelete({
+        '_userId' : req.params.userId,
+        '_id' : req.params.taskId
+    })
+        .then(task => res.send(task))
+        .catch((error) => console.log(error));
+});
 
 app.listen(3000, () => console.log("Server Connected on port 3000"));
