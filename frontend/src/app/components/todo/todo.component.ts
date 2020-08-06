@@ -20,7 +20,7 @@ import Task from "src/app/models/tasks";
 import { TaskService } from "src/app/services/task.service";
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
+  //   encapsulation: ViewEncapsulation.None,
   selector: "app-todo",
   templateUrl: "./todo.component.html",
   styleUrls: ["./todo.component.css"]
@@ -44,7 +44,14 @@ export class TodoComponent {
     this.userId = this.getCurrentUserId();
     this.taskService
       .getTasks(this.userId)
-      .subscribe((tasks: Task[]) => (this.tasks = tasks));
+      .subscribe(
+        (tasks: Task[]) => (
+          (this.tasks = tasks),
+          tasks.sort((a, b) =>
+            a.completed > b.completed ? 1 : b.completed > a.completed ? -1 : 0
+          )
+        )
+      );
   }
 
   form: FormGroup = new FormGroup({
@@ -71,6 +78,13 @@ export class TodoComponent {
   resetAddDetailsForm() {
     this.form.reset();
     this.form.controls.addDetails.setErrors(null);
+  }
+
+  logCheckBoxClick(task) {
+    console.log(task);
+    this.taskService
+      .setCompleted(this.userId, task)
+      .subscribe(() => (task.completed = !task.completed));
   }
 
   submit() {

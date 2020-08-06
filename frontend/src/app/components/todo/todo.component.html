@@ -1,13 +1,20 @@
 <div class="todo-container">
-
   <div class="todo-nav-bar">
     <mat-tab-group mat-align-tabs="center">
-      <mat-tab  *ngFor="let content of data" [label]="content.item"> 
-        
-        <form [formGroup]="form" class="todo-add-content-form" (ngSubmit)="submit()"  *ngIf="content.item !== 'Completed'">
+      <mat-tab *ngFor="let content of data" [label]="content.item">
+        <form
+          [formGroup]="form"
+          class="todo-add-content-form"
+          (ngSubmit)="submit()"
+          *ngIf="content.item !== 'Completed'"
+        >
           <div class="todo-add-content">
             <mat-form-field appearance="outline">
-              <input matInput placeholder="Placeholder" formControlName="addDetails">
+              <input
+                matInput
+                placeholder="Placeholder"
+                formControlName="addDetails"
+              />
               <mat-error *ngIf="form.hasError('required', 'addDetails')">
                 Task cannot be empty
               </mat-error>
@@ -15,13 +22,25 @@
             <div class="add-content-btn">
               <button mat-button>Add</button>
             </div>
-          </div> 
-        </form> 
-        <div class="example-section">
-            <ul *ngFor="let task of tasks">
-            <mat-checkbox class="example-margin"> {{ task.title }}</mat-checkbox>
-            </ul>
           </div>
+        </form>
+        <div class="tasks-section" *ngFor="let task of tasks">
+          <ul
+            *ngIf="
+              (content.item == 'Completed' && task.completed) ||
+              (content.item == 'Active' && !task.completed) ||
+              content.item == 'All'
+            "
+          >
+            <mat-checkbox
+              [checked]="task.completed"
+              class="task-checkbox"
+              (click)="logCheckBoxClick(task)"
+            >
+              {{ task.title }}</mat-checkbox
+            >
+          </ul>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>
