@@ -26,6 +26,7 @@
         </form>
         <div class="tasks-section" *ngFor="let task of tasks">
           <ul
+            class="list-tasks"
             *ngIf="
               (content.item == 'Completed' && task.completed) ||
               (content.item == 'Active' && !task.completed) ||
@@ -38,6 +39,13 @@
               (click)="logCheckBoxClick(task)"
             >
               {{ task.title }}</mat-checkbox
+            >
+
+            <i
+              *ngIf="content.item == 'Completed'"
+              class="material-icons delete-btn"
+              (click)="deleteTask(task)"
+              >delete_outline</i
             >
           </ul>
         </div>

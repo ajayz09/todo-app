@@ -87,6 +87,17 @@ export class TodoComponent {
       .subscribe(() => (task.completed = !task.completed));
   }
 
+  deleteTask(task) {
+    console.log(task);
+    debugger;
+    this.taskService
+      .deleteTask(this.userId, task._id)
+      .subscribe(
+        (tasks: Task) =>
+          (this.tasks = this.tasks.filter(t => t._id != task._id))
+      );
+  }
+
   submit() {
     if (this.form.invalid) return;
 
