@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy-conf.json",
+    "client": "ng serve --proxy-config proxy-conf.json",
+    "server": "nodemon ../backend/app.js",
+    "start": "npx npm-run-all -p client server",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

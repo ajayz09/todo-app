@@ -5,6 +5,7 @@
         <div>
           <form
             [formGroup]="form"
+            autocomplete="off"
             class="todo-add-content-form"
             (ngSubmit)="submit()"
             *ngIf="content.item !== 'Completed'"
