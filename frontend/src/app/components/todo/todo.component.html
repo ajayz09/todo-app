@@ -30,41 +30,43 @@
             </div>
           </form>
         </div>
-        <div class="tasks-section" *ngFor="let task of tasks; count as i">
-          <ul
-            class="list-tasks"
-            *ngIf="
-              (content.item == 'Completed' && task.completed) ||
-              (content.item == 'Active' && !task.completed) ||
-              content.item == 'All'
-            "
-          >
-            <mat-checkbox
-              [checked]="task.completed"
-              class="task-checkbox"
-              (click)="logCheckBoxClick(task)"
+        <div class="tasks-container">
+          <div class="tasks-section" *ngFor="let task of tasks; count as i">
+            <ul
+              class="list-tasks"
+              *ngIf="
+                (content.item == 'Completed' && task.completed) ||
+                (content.item == 'Active' && !task.completed) ||
+                content.item == 'All'
+              "
             >
-              {{ task.title }}</mat-checkbox
-            >
+              <mat-checkbox
+                [checked]="task.completed"
+                class="task-checkbox"
+                (click)="logCheckBoxClick(task)"
+              >
+                {{ task.title }}</mat-checkbox
+              >
+              <button
+                mat-icon-button
+                *ngIf="content.item == 'Completed'"
+                (click)="deleteTask(task)"
+              >
+                <mat-icon>delete </mat-icon>
+              </button>
+            </ul>
+          </div>
+          <div align="right">
             <button
-              mat-icon-button
-              *ngIf="content.item == 'Completed'"
-              (click)="deleteTask(task)"
+              mat-button
+              *ngIf="showDeleteBtn(content.item)"
+              class="delete-all-btn"
+              (click)="deleteAllCompleted()"
             >
-              <mat-icon>delete </mat-icon>
+              <i class="material-icons delete-all-btn-logo">delete_outline</i>
+              delete all
             </button>
-          </ul>
-        </div>
-        <div align="right">
-          <button
-            mat-button
-            *ngIf="showDeleteBtn(content.item)"
-            class="delete-all-btn"
-            (click)="deleteAllCompleted()"
-          >
-            <i class="material-icons delete-all-btn-logo">delete_outline</i>
-            delete all
-          </button>
+          </div>
         </div>
       </mat-tab>
     </mat-tab-group>

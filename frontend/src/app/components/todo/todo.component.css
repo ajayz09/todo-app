@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:wght@100;300;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
 
 .todo-container {
   font-family: "Raleway", sans-serif !important;
@@ -19,8 +20,8 @@
 }
 
 .add-details-field input {
+  font-family: "PT Sans", sans-serif !important;
   padding-top: 4px;
-  /* width: 100%; */
 }
 
 ::ng-deep .todo-container .mat-tab-label {
@@ -31,7 +32,6 @@
 }
 
 .todo-add-content {
-  /* padding: 10px; */
   margin-top: 10px;
   display: flex;
   justify-content: flex-end;
@@ -39,22 +39,20 @@
 
 .add-details {
   flex: 1;
-  /* width: 100%; */
 }
 
 .add-content-btn {
   margin-left: 15px;
   float: right;
-  /* height: 45px; */
 }
 
 .task-checkbox {
   align-self: center;
+  font-family: "PT Sans", sans-serif !important;
 }
 
 ::ng-deep .todo-container .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  /* background: #6da6f2; */
   border-radius: 50px 50px 0px 0px;
   height: 4px;
   min-width: 160px;

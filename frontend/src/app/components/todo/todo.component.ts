@@ -127,7 +127,10 @@ export class TodoComponent {
   }
 
   submit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      console.log("Invalid");
+      return;
+    }
 
     //  Create new task
     this.taskService

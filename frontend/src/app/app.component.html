@@ -1,6 +1,17 @@
 <div class="main-container">
-  <div>
+  <div class="title-container">
     <h1>#todo</h1>
+
+    <button
+      mat-icon-button
+      class="logout-button"
+      *ngIf="router.url === '/todo'"
+      title="Logout"
+      (click)="clickedLogout()"
+    >
+      <mat-icon>power_settings_new</mat-icon>
+    </button>
+
     <!-- <mat-icon>logout</mat-icon> -->
   </div>
 
