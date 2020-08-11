@@ -2,29 +2,35 @@
   <div class="todo-nav-bar">
     <mat-tab-group mat-align-tabs="center">
       <mat-tab *ngFor="let content of data" [label]="content.item">
-        <form
-          [formGroup]="form"
-          class="todo-add-content-form"
-          (ngSubmit)="submit()"
-          *ngIf="content.item !== 'Completed'"
-        >
-          <div class="todo-add-content">
-            <mat-form-field appearance="outline">
-              <input
-                matInput
-                placeholder="Placeholder"
-                formControlName="addDetails"
-              />
-              <mat-error *ngIf="form.hasError('required', 'addDetails')">
-                Task cannot be empty
-              </mat-error>
-            </mat-form-field>
-            <div class="add-content-btn">
-              <button mat-button>Add</button>
+        <div>
+          <form
+            [formGroup]="form"
+            class="todo-add-content-form"
+            (ngSubmit)="submit()"
+            *ngIf="content.item !== 'Completed'"
+          >
+            <div class="todo-add-content">
+              <div class="add-details">
+                <mat-form-field class="add-details-field" appearance="outline">
+                  <input
+                    matInput
+                    placeholder="add details"
+                    formControlName="addDetails"
+                  />
+                  <!-- <mat-error *ngIf="form.hasError('required', 'addDetails')">
+                    Task cannot be empty
+                  </mat-error> -->
+                </mat-form-field>
+              </div>
+              <div class="add-content-btn">
+                <button mat-raised-button style="height:41px;" color="primary">
+                  Add
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
-        <div class="tasks-section" *ngFor="let task of tasks">
+          </form>
+        </div>
+        <div class="tasks-section" *ngFor="let task of tasks; count as i">
           <ul
             class="list-tasks"
             *ngIf="
@@ -40,14 +46,32 @@
             >
               {{ task.title }}</mat-checkbox
             >
+            <button
+              mat-icon-button
+              *ngIf="content.item == 'Completed'"
+              (click)="deleteTask(task)"
+            >
+              <mat-icon>delete </mat-icon>
+            </button>
 
-            <i
+            <!-- <i
               *ngIf="content.item == 'Completed'"
               class="material-icons delete-btn"
               (click)="deleteTask(task)"
               >delete_outline</i
-            >
+            > -->
           </ul>
+        </div>
+        <div align="right">
+          <button
+            mat-button
+            *ngIf="showDeleteBtn(content.item)"
+            class="delete-all-btn"
+            (click)="deleteAllCompleted()"
+          >
+            <i class="material-icons delete-all-btn-logo">delete_outline</i>
+            delete all
+          </button>
         </div>
       </mat-tab>
     </mat-tab-group>
