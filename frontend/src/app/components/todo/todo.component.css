@@ -6,19 +6,6 @@
   margin: 50px 200px 0px 200px;
 }
 
-/* .todo-nav-bar {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-} */
-
-/* ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  height: 36px;
-}
-::ng-deep .mat-form-field-flex > .mat-form-field-infix {
-  border-top: 5px solid transparent;
-} */
-
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
   margin: 0 !important;
 }
@@ -61,6 +48,10 @@
   /* height: 45px; */
 }
 
+.task-checkbox {
+  align-self: center;
+}
+
 ::ng-deep .todo-container .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
   /* background: #6da6f2; */
@@ -100,9 +91,3 @@
 .delete-all-btn-logo {
   transform: scale(0.6);
 }
-
-/* .list-tasks .task-checkbox {
-}
-
-.task-delete-btn {
-} */
