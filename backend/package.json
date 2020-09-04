@@ -17,6 +17,7 @@
     "lodash": "^4.17.19",
     "mongoose": "^5.9.24",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "bl": ">=2.2.1"
   }
 }
